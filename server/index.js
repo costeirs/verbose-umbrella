@@ -21,6 +21,10 @@ async function start() {
     await builder.build()
   }
 
+  // Import API Routes
+  app.use('/api', require('./api/users'))
+  app.use('/api', require('./api/projects'))
+
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
