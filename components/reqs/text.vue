@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h1>{{ text }}</h1>
+    <p>{{ text }}</p>
   </div>
 </template>
 <script>
 export default {
   props: {
-      text: String
+      text: {
+        default: '',
+        type: String
+      }
   }
 }
 </script>

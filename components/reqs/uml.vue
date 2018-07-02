@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="umlsrc" />
+    <img :src="umlsrc" >
   </div>
 </template>
 <script>
@@ -8,7 +8,10 @@ const plantumlEncoder = require("plantuml-encoder");
 
 export default {
   props: {
-    text: String
+    text: {
+      default: "",
+      type: String
+    }
   },
   computed: {
     umlsrc() {
