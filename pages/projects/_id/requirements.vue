@@ -9,8 +9,12 @@
 
           <ul>
             <li v-for="todo in todos" v-bind:key="todo.id">
-              <input type="checkbox" :checked="todo.done" @change="toggle(todo)">
-              <span :class="{ done: todo.done }">{{ todo.text }}</span>
+              <component
+
+                v-bind:is="'display-'+todo.type"
+                v-bind="todo"
+                class="tab"
+              ></component>
             </li>
             <li><input placeholder="What needs to be done?" @keyup.enter="addTodo"></li>
           </ul>
@@ -20,12 +24,18 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations } from "vuex"
+import DisplayText from '~/components/reqs/text'
+import DisplayUML from '~/components/reqs/uml'
 
 export default {
-  async fetch ({ store, params }) {
-    console.log("fetching reqs")
-    await store.dispatch('requirements/getReqs');
+  components: {
+    'display-text': DisplayText,
+    'display-plantuml': DisplayUML
+  },
+  async fetch({ store, params }) {
+    console.log("fetching reqs");
+    await store.dispatch("requirements/getReqs");
   },
   computed: {
     todos() {
