@@ -1,78 +1,33 @@
 const { Router } = require('express')
+const Projects = require('../models/project')
+const ReqModel = require('../models/requirements')
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 const router = Router()
 
-// Mock Projects
-const projects = [
-  {
-    name: 'Alexandre',
-    description: 'Culpa sint minim irure pariatur esse ut.',
-    team: [
-      {
-        user: 'stephen',
-        role: 'pm'
-      },
-      {
-        user: 'alice',
-        role: 'dev',
-        lead: true
-      },
-      {
-        user: 'bob',
-        role: 'dev'
-      }
-    ],
-
-  }
-]
-
 /* GET projects listing. */
-router.get('/projects', function (req, res, next) {
-  res.json(projects)
+router.get('/', async (req, res, next) => {
+  const results = await Projects.find().exec()
+  res.json(results)
 })
 
 /* GET projects by ID. */
-router.get('/projects/:id', function (req, res, next) {
-  const id = parseInt(req.params.id)
-  if (id >= 0 && id < projects.length) {
-    res.json(projects[id])
-  } else {
-    res.sendStatus(404)
+router.get('/:id', async (req, res, next) => {
+  const results = await Projects.find({_id: req.params.id}).exec()
+  if (!results) {
+    return res.sendStatus(404)
   }
+  res.json(results)
 })
 
-router.get('/projects/:id/requirements', function (req, res, next) {
-  res.json(
-    [
-      {
-        id: 0,
-        order: 0,
-        created_by: 'stephen',
-        created_on: new Date(),
-        status: 'accepted',
-        type: 'text',
-        text: 'First Lorem nisi sit Lorem pariatur enim id laboris nisi eiusmod.'
-      },
-      {
-        id: 2,
-        order: 1,
-        created_by: 'stephen',
-        created_on: new Date(),
-        status: 'pending',
-        type: 'text',
-        text: 'Second Voluptate id sunt culpa nostrud esse fugiat.'
-      },
-      {
-        id: 1,
-        order: 2,
-        created_by: 'stephen',
-        created_on: new Date(),
-        status: 'pending',
-        type: 'plantuml',
-        text: 'bob -> alice: Authentication Request\nbob <-- alice\nbob <-- alice'
-      },
-    ]
-  )
+router.get('/:id/requirements', async (req, res, next) => {
+  console.log("lookin for",req.params.id)
+  const results = await ReqModel.find({
+    "project": req.params.id
+  }).exec()
+  console.log("reqs=",results)
+  res.json(results)
 })
 
 module.exports = router

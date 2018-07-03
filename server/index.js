@@ -28,9 +28,9 @@ async function start() {
   }
 
   // Import API Routes
-  app.use('/api', require('./api/users'))
-  app.use('/api', require('./api/projects'))
-  app.use('/api', require('./api/dashboard'))
+  app.use('/api/users', require('./api/users'))
+  app.use('/api/projects', require('./api/projects'))
+  app.use('/api/dashboard', require('./api/dashboard'))
 
   // Give nuxt middleware to express
   app.use(nuxt.render)

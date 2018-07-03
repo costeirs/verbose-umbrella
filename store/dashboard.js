@@ -4,7 +4,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_PROJECTS(state, todos) {
-    state.projects = todos
+    state.projects = todos.projects
   },
 }
 

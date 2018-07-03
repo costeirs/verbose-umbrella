@@ -1,19 +1,27 @@
 export const state = () => ({
-  authUser: null
+  authUser: null,
+  currentProject: null
 })
 
 export const mutations = {
   SET_USER: function (state, user) {
     state.authUser = user
+  },
+  SET_CURRENT_PROJECT: function (state, newProject) {
+    state.currentProject = newProject
   }
 }
 
 export const actions = {
   // nuxtServerInit is called by Nuxt.js before server-rendering every page
-  nuxtServerInit({ commit }, { req }) {
+  async nuxtServerInit({ commit, dispatch }, { req }) {
     if (req.session && req.session.authUser) {
       commit('SET_USER', req.session.authUser)
     }
+
+    // left outside auth for prototyping
+    await dispatch("dashboard/getDashboard")
+    commit('SET_CURRENT_PROJECT', 0)
   },
   async login({ commit }, { username, password }) {
     try {

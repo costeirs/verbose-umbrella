@@ -7,9 +7,9 @@
         />
 
         <ul>
-          <li 
+          <li
             v-for="todo in todos"
-            :key="todo.id">
+            :key="todo._id">
             <component
 
               :is="'display-'+todo.type"
@@ -18,8 +18,8 @@
             />
             <button @click="edit(todo)">edit</button>
           </li>
-          <li><input 
-            placeholder="What needs to be done?" 
+          <li><input
+            placeholder="What needs to be done?"
             @keyup.enter="addTodo"></li>
         </ul>
       </b-col>
