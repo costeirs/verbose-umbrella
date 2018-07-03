@@ -24,7 +24,10 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#FFFFFF' },
+  loading: {
+    color: '#FF0101',
+    height: '5px'
+  },
 
   /*
   ** Global CSS
@@ -47,6 +50,12 @@ module.exports = {
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt'
   ],
+  /*
+   ** Router configuration
+   */
+  router: {
+    linkActiveClass: 'active-link'
+  },
   /*
   ** Axios module configuration
   */

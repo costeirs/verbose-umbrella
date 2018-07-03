@@ -1,27 +1,52 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col>
-        <b-jumbotron
-          header="Umbrella"
-        >
-          <p>Ea in aliqua dolor labore aliqua in ea Lorem occaecat velit veniam. Laborum cupidatat id minim occaecat pariatur consectetur tempor mollit tempor cillum. Dolor dolore veniam culpa sunt elit culpa et Lorem. Eiusmod cupidatat cupidatat ullamco sit duis est ullamco magna sunt occaecat consequat. Nulla fugiat ea labore nulla minim reprehenderit ex nulla. Sunt nulla magna nulla in magna fugiat tempor quis enim. Incididunt enim fugiat elit id officia ut.</p>
-        </b-jumbotron>
-        <p>
-          Ipsum laboris laborum aute excepteur consectetur magna irure deserunt sunt adipisicing minim. Ex quis esse amet sint. Eiusmod irure ullamco ex ullamco occaecat dolore qui eu adipisicing fugiat ex. Commodo elit laboris nisi duis excepteur proident exercitation commodo ea fugiat.
-        </p>
+    <b-row class="mt-4">
+      <b-col
+        v-for="project in projects"
+        :key="project.id"
+        cols="6"
+        sm="4"
+        md="3"
+        lg="2"
+        xl="2"
+        class="site text-center">
+        <nuxt-link :to="'/projects/'+project.id+'/requirements'">
+          <img
+            :src="'http://placehold.it/300x300/000000/ffffff?text='+project.name"
+            style="max-width:150px;">
+          <div>{{ project.name }}</div>
+        </nuxt-link>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-
 export default {
-  components: {
+  async fetch({ store, params }) {
+    console.log("fetching dashboard");
+    await store.dispatch("dashboard/getDashboard");
+  },
+  computed: {
+    projects() {
+      return this.$store.state.dashboard.projects;
+    }
   }
-}
+};
 </script>
 
 <style>
+.site {
+  margin-bottom: 1rem;
+}
+.site a {
+  color: black;
+}
+.site a:hover img {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.site a:active {
+  position: relative;
+  top: 3px;
+}
 </style>

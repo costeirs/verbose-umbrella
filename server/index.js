@@ -4,6 +4,7 @@ const { Nuxt, Builder } = require('nuxt-edge')
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
+const mongoose = require('mongoose')
 
 app.set('port', port)
 
@@ -12,6 +13,11 @@ let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
 async function start() {
+  // 1. Connect to the database
+  mongoose.Promise = Promise
+  mongoose.connection.on('error', error => { throw error })
+  await mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/umbrella')
+
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
@@ -24,6 +30,7 @@ async function start() {
   // Import API Routes
   app.use('/api', require('./api/users'))
   app.use('/api', require('./api/projects'))
+  app.use('/api', require('./api/dashboard'))
 
   // Give nuxt middleware to express
   app.use(nuxt.render)

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-navbar 
-      toggleable="md" 
-      type="dark" 
+    <b-navbar
+      toggleable="sm"
+      type="dark"
       variant="dark">
 
       <b-navbar-toggle target="nav_collapse" />
@@ -11,14 +11,14 @@
         Umbrella
       </b-navbar-brand>
 
-      <b-collapse 
-        id="nav_collapse" 
+      <b-collapse
+        id="nav_collapse"
         is-nav>
 
         <b-navbar-nav>
-          <b-nav-item href="/projects/0/requirements">Requirements</b-nav-item>
-          <b-nav-item href="/projects/0/qa">QA</b-nav-item>
-          <b-nav-item href="/projects/0/artifacts">Artifacts</b-nav-item>
+          <b-nav-item to="/projects/0/requirements">Requirements</b-nav-item>
+          <b-nav-item to="/projects/0/qa">QA</b-nav-item>
+          <b-nav-item to="/projects/0/artifacts">Artifacts</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -29,8 +29,8 @@
             <template slot="button-content">
               <em>User</em>
             </template>
-            <b-dropdown-item href="#">Help</b-dropdown-item>
-            <b-dropdown-item href="#">Signout</b-dropdown-item>
+            <b-dropdown-item href="/help">Help</b-dropdown-item>
+            <b-dropdown-item href="/logout">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
