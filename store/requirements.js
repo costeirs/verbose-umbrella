@@ -37,9 +37,10 @@ export const actions = {
 //   saveTodos({ state }) {
 //     axios.put('/api/todos', { todos: state.todos })
 //   },
-  async getReqs ({ commit }) {
+  async getReqs ({ commit, rootState }) {
     console.log("getReqs")
-    const { data } = await this.$axios.get('/api/projects/0/requirements')
+    const currentProject = rootState.currentProject
+    const { data } = await this.$axios.get('/api/projects/'+currentProject._id+'/requirements')
     commit('SET_TODOS', data)
   }
 }

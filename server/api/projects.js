@@ -12,6 +12,12 @@ router.get('/', async (req, res, next) => {
   res.json(results)
 })
 
+/* GET recent projects */
+router.get('/recent', async (req, res, next) => {
+  const results = await Projects.find().select('name').exec()
+  res.json(results)
+})
+
 /* GET projects by ID. */
 router.get('/:id', async (req, res, next) => {
   const results = await Projects.find({_id: req.params.id}).exec()
@@ -24,7 +30,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/:id/requirements', async (req, res, next) => {
   console.log("lookin for",req.params.id)
   const results = await ReqModel.find({
-    "project": req.params.id
+    project: new ObjectId(req.params.id)
   }).exec()
   console.log("reqs=",results)
   res.json(results)

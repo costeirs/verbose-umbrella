@@ -19,7 +19,7 @@
         <b-navbar-nav>
           <b-nav-item-dropdown v-if="projects.length > 0">
             <template slot="button-content">
-              Project
+              {{ currentProject.name }}
             </template>
             <b-dropdown-item
               v-for="p in projects"
@@ -31,9 +31,9 @@
         </b-navbar-nav>
 
         <b-navbar-nav>
-          <b-nav-item to="/projects/0/requirements">Requirements</b-nav-item>
-          <b-nav-item to="/projects/0/qa">QA</b-nav-item>
-          <b-nav-item to="/projects/0/artifacts">Artifacts</b-nav-item>
+          <b-nav-item :to="currentProjectUrl+'/requirements'">Requirements</b-nav-item>
+          <b-nav-item :to="currentProjectUrl+'/qa'">QA</b-nav-item>
+          <b-nav-item :to="currentProjectUrl+'/artifacts'">Artifacts</b-nav-item>
         </b-navbar-nav>
 
         <!-- user menu -->
@@ -55,8 +55,14 @@
 <script>
 export default {
   computed: {
+    currentProject () {
+      return this.$store.state.currentProject
+    },
+    currentProjectUrl() {
+      return '/projects/' + this.currentProject._id
+    },
     projects () {
-      return this.$store.state.dashboard.projects
+      return this.$store.state.recentProjects
     }
   }
 };
