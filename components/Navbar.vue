@@ -24,7 +24,7 @@
             <b-dropdown-item
               v-for="p in projects"
               :key="p._id"
-              :href="'/projects/'+p._id">
+              @click="switchCurrentProject(p)">
               {{ p.name }}
             </b-dropdown-item>
           </b-nav-item-dropdown>
@@ -63,6 +63,12 @@ export default {
     },
     projects () {
       return this.$store.state.recentProjects
+    }
+  },
+  methods: {
+    async switchCurrentProject (project) {
+      await this.$store.dispatch("SET_CURRENT_PROJECT", project)
+      this.$router.push(this.currentProjectUrl)
     }
   }
 };

@@ -31,8 +31,12 @@ router.get('/:id/requirements', async (req, res, next) => {
   console.log("lookin for",req.params.id)
   const results = await ReqModel.find({
     project: new ObjectId(req.params.id)
-  }).exec()
-  console.log("reqs=",results)
+  })
+  .sort({
+    order: 1
+  })
+  .exec()
+
   res.json(results)
 })
 
