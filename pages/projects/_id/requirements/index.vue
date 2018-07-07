@@ -17,58 +17,23 @@
               v-bind="todo"
               class=""
             />
-            <button
+            <b-btn
               class="edit-btn"
               @click="edit(todo)">
               edit
-            </button>
+            </b-btn>
           </li>
         </ul>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <b-btn v-b-modal.newReqModal>New&hellip;</b-btn>
+        <b-btn @click="showNewReqModal">New&hellip;</b-btn>
         <!-- new requirements modal -->
-        <b-modal
-          id="newReqModal"
-          ok-title="Save"
-          size="lg"
-          title="New Requirement"
-        >
-          <b-container fluid>
-            <b-row class="my-1">
-              <b-col sm="3">
-                <label for="newreq.name">Name:</label>
-              </b-col>
-              <b-col sm="9">
-                <b-form-input
-                  id="newreq.name"
-                  :v-text="newreq.name"
-                  size="sm"
-                  type="text" />
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col>
-                <b-tabs
-                  no-fade>
-                  <b-tab
-                    active
-                    title="Business Case">
-                    Tab Contents 1
-                  </b-tab>
-                  <b-tab title="Justification">
-                    Tab Contents 2
-                  </b-tab>
-                  <b-tab title="Links">
-                    Tab Contents 3
-                  </b-tab>
-                </b-tabs>
-              </b-col>
-            </b-row>
-          </b-container>
-        </b-modal>
+        <EditReqModal
+          ref="NewReqModal"
+          v-model="newreq"
+          @submit="newReqSubmit" />
       </b-col>
     </b-row>
   </b-container>
@@ -79,13 +44,21 @@ import { mapMutations } from "vuex";
 import DisplayText from "~/components/reqs/text";
 import DisplayUML from "~/components/reqs/uml";
 
+import EditReqModal from "~/components/ReqEditModal";
+
 export default {
   components: {
     "display-text": DisplayText,
-    "display-plantuml": DisplayUML
+    "display-plantuml": DisplayUML,
+    EditReqModal
   },
-  data: function() {
-    return {newreq: {name: null}}
+  data: function () {
+    return {
+      newreq: {
+        name: '',
+        reqType: 'business'
+      }
+    }
   },
   async fetch({ store, params }) {
     console.log("fetching reqs");
@@ -104,6 +77,15 @@ export default {
     edit(item) {
       console.log("gonna edit", item);
 
+    },
+    newReqSubmit(e) {
+      console.log("gonna save new req", e);
+      console.log("newreq=", this.newreq);
+      this.$refs.NewReqModal.hide()
+    },
+    showNewReqModal() {
+      console.log("showing new req modal")
+      this.$refs.NewReqModal.show()
     },
     ...mapMutations({
       toggle: "requirements/toggle"
