@@ -40,4 +40,11 @@ router.get('/:id/requirements', async (req, res, next) => {
   res.json(results)
 })
 
+router.post('/:pid/requirements', async (req, res, next) => {
+  const newReq = new ReqModel(req.body)
+  newReq.projectId = req.params.pid
+
+  await newReq.save()
+})
+
 module.exports = router

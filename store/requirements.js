@@ -3,11 +3,11 @@ export const state = () => ({
 })
 
 export const mutations = {
-  add(state, text) {
-    state.list.push({
-      text: text,
-      done: false
-    })
+  add(state, item) {
+    if(!item.type){
+      item.type = 'text'
+    }
+    state.list.push(item)
   },
   remove(state, { todo }) {
     state.list.splice(state.list.indexOf(todo), 1)
@@ -21,9 +21,9 @@ export const mutations = {
 }
 
 export const actions = {
-//   addTodo({ commit }, todo) {
-//     commit('ADD_TODO', todo)
-//   },
+  addTodo({ commit }, todo) {
+    commit('add', todo)
+  },
   setTodos({ commit }, todos) {
     commit('SET_TODOS', todos)
   },
@@ -34,9 +34,14 @@ export const actions = {
 //     var value = state.todos.filter(todo => todo.completed).length === state.todos.length
 //     commit('FILTER_TODOS', value)
 //   },
-//   saveTodos({ state }) {
-//     axios.put('/api/todos', { todos: state.todos })
-//   },
+  async saveTodo({ dispatch, rootState }, todo) {
+    dispatch('addTodo', todo)
+    const currentProject = rootState.currentProject
+    await this.$axios.post('/api/projects/'+currentProject._id+'/requirements', todo)
+  },
+// async saveTodos({ state }) {
+//   await this.$axios.put('/api/projects/'+currentProject._id+'/requirements', { todos: state.todos })
+// },
   async getReqs ({ commit, rootState }) {
     console.log("getReqs")
     const currentProject = rootState.currentProject

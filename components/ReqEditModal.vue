@@ -24,7 +24,7 @@
         >
           <b-form-input
             id="name"
-            v-model="value.name"
+            v-model="value.text"
             size="sm"
             type="text"
           />
@@ -93,6 +93,7 @@ export default {
     onsubmit: function (e) {
       e.preventDefault();
       // validation
+      this.value.type = 'text'
       // notify parent
       this.$emit('submit')
     }

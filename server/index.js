@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 
 app.set('port', port)
 
+app.use(express.json());
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')

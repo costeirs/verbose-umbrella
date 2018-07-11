@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 import DisplayText from "~/components/reqs/text";
 import DisplayUML from "~/components/reqs/uml";
 
@@ -54,10 +54,7 @@ export default {
   },
   data: function () {
     return {
-      newreq: {
-        name: '',
-        reqType: 'business'
-      }
+      newreq: {}
     }
   },
   async fetch({ store, params }) {
@@ -70,25 +67,27 @@ export default {
     }
   },
   methods: {
-    addTodo(e) {
-      this.$store.commit("requirements/add", e.target.value);
-      e.target.value = "";
-    },
     edit(item) {
       console.log("gonna edit", item);
-
+      this.newreq = item
+      this.$refs.NewReqModal.show()
     },
-    newReqSubmit(e) {
+    async newReqSubmit(e) {
       console.log("gonna save new req", e);
       console.log("newreq=", this.newreq);
+      await this.addTodo(this.newreq)
       this.$refs.NewReqModal.hide()
     },
     showNewReqModal() {
       console.log("showing new req modal")
+      this.newreq = {
+        text: '',
+        reqType: 'business'
+      }
       this.$refs.NewReqModal.show()
     },
-    ...mapMutations({
-      toggle: "requirements/toggle"
+    ...mapActions({
+      addTodo: "requirements/saveTodo"
     })
   }
 };
