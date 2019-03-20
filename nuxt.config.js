@@ -1,8 +1,6 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
-
   /*
   ** Head of the page
   */

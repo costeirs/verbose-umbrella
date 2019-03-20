@@ -11,7 +11,8 @@
           <li
             v-for="todo in todos"
             :key="todo._id"
-            class="req-item">
+            class="req-item"
+          >
             <component
               :is="'display-'+todo.type"
               v-bind="todo"
@@ -19,7 +20,8 @@
             />
             <b-btn
               class="edit-btn"
-              @click="edit(todo)">
+              @click="edit(todo)"
+            >
               edit
             </b-btn>
           </li>
@@ -28,12 +30,15 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-btn @click="showNewReqModal">New&hellip;</b-btn>
+        <b-btn @click="showNewReqModal">
+          New&hellip;
+        </b-btn>
         <!-- new requirements modal -->
         <EditReqModal
           ref="NewReqModal"
           v-model="newreq"
-          @submit="newReqSubmit" />
+          @submit="newReqSubmit"
+        />
       </b-col>
     </b-row>
   </b-container>
@@ -57,14 +62,14 @@ export default {
       newreq: {}
     }
   },
-  async fetch({ store, params }) {
-    console.log("fetching reqs");
-    await store.dispatch("requirements/getReqs");
-  },
   computed: {
     todos() {
       return this.$store.state.requirements.list;
     }
+  },
+  async fetch({ store, params }) {
+    console.log("fetching reqs");
+    await store.dispatch("requirements/getReqs");
   },
   methods: {
     edit(item) {

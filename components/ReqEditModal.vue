@@ -15,7 +15,9 @@
           sm="2"
           lg="1"
         >
-          <label for="name">Name:</label>
+          <label for="name">
+            Name:
+          </label>
         </b-col>
         <b-col
           sm="7"
@@ -44,10 +46,12 @@
       <b-row>
         <b-col>
           <b-tabs
-            no-fade>
+            no-fade
+          >
             <b-tab
               active
-              title="Business Case">
+              title="Business Case"
+            >
               Tab Contents 1
             </b-tab>
             <b-tab title="Justification">

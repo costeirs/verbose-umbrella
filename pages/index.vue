@@ -1,7 +1,8 @@
 <template>
   <b-container>
     <b-row
-      v-if="projects.length > 0">
+      v-if="projects.length > 0"
+    >
       <b-col
         v-for="project in projects"
         :key="project._id"
@@ -10,16 +11,19 @@
         md="3"
         lg="2"
         xl="2"
-        class="site text-center">
+        class="site text-center"
+      >
         <nuxt-link :to="'/projects/'+project._id+'/requirements'">
           <img
-            :src="'http://placehold.it/300x300/000000/ffffff?text='+project.name">
+            :src="'http://placehold.it/300x300/000000/ffffff?text='+project.name"
+          >
           <div>{{ project.name }}</div>
         </nuxt-link>
       </b-col>
     </b-row>
     <b-row
-      v-else>
+      v-else
+    >
       <b-col>
         <h1>No Projects</h1>
         <p>Create one</p>
@@ -30,15 +34,15 @@
 
 <script>
 export default {
-  async fetch({ store, params }) {
-    console.log("fetching dashboard");
-    await store.dispatch("dashboard/getDashboard");
-  },
   computed: {
     projects() {
       return this.$store.state.dashboard.projects;
     }
-  }
+  },
+  async fetch({ store, params }) {
+    console.log("fetching dashboard");
+    await store.dispatch("dashboard/getDashboard");
+  },
 };
 </script>
 

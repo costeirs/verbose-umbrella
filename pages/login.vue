@@ -3,35 +3,45 @@
     <b-row>
       <b-col
         md="4"
-        offset-md="4">
+        offset-md="4"
+      >
         <b-card
           header="Please Log in"
-          header-tag="header">
+          header-tag="header"
+        >
           <b-form
             @submit="onSubmit"
-            @reset="onReset">
+            @reset="onReset"
+          >
             <b-form-group
               label="Username:"
-              label-for="username">
+              label-for="username"
+            >
               <b-form-input
                 id="username"
                 v-model="username"
                 type="text"
                 required
-                autofocus/>
+                autofocus
+              />
             </b-form-group>
             <b-form-group
               label="Password:"
-              label-for="password">
+              label-for="password"
+            >
               <b-form-input
                 id="password"
                 v-model="password"
                 type="password"
-                required/>
+                required
+              />
             </b-form-group>
             <b-button
               href="#"
-              variant="success">Go somewhere</b-button>
+              variant="success"
+            >
+              Go somewhere
+            </b-button>
           </b-form>
         </b-card>
       </b-col>

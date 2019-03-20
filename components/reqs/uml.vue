@@ -4,7 +4,7 @@
       {{ text }}
     </p>
     <p>
-      <img :src="umlsrc" >
+      <img :src="umlsrc">
     </p>
   </div>
 </template>
