@@ -12,18 +12,18 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.4.1",
+    "@nuxtjs/axios": "^5.5.1",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.15",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.19",
-    "nuxt-edge": "latest",
+    "bootstrap-vue": "^2.0.0-rc.20",
+    "express": "^4.17.0",
+    "mongoose": "^5.5.11",
+    "nuxt-edge": "^2.7.2-25976168.59071e4c",
     "plantuml-encoder": "^1.2.5",
-    "vuedraggable": "^2.19.2"
+    "vuedraggable": "^2.21.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.15.3",
+    "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.2"
   }
